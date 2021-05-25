@@ -5,6 +5,7 @@ import org.koin.core.inject
 import ru.android.rickandmortymvp.app.models.data.location.Location
 import ru.android.rickandmortymvp.app.models.repository.Repository
 import ru.android.rickandmortymvp.base.MvpPresenter
+import ru.android.rickandmortymvp.ui.character.CharacterScreen
 import ru.android.rickandmortymvp.ui.mappers.LocationToPresModelMapper
 
 class Presenter(
@@ -20,6 +21,12 @@ class Presenter(
 
     override fun onCreate() {
         loadLocation(locationId)
+    }
+
+    fun showCharacter(id: Int) {
+        screensManager.showScreen(
+            CharacterScreen.newInstance(id)
+        )
     }
 
     private fun loadLocation(id: Int) {

@@ -34,7 +34,7 @@ class LocationScreen : MvpFragment<Presenter>(), View {
 
     private val locationAdapter by lazy {
         LocationAdapter().apply {
-            onClick = { }
+            onClick = { presenter.showCharacter(it) }
         }
     }
 

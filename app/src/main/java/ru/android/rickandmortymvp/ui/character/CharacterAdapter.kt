@@ -15,7 +15,14 @@ class CharacterAdapter : RecyclerViewAdapter<String>() {
 
             numberView.text = model.replace("https://rickandmortyapi.com/api/episode/", "")
 
-            setOnClickListener { onClick(model.replace("https://rickandmortyapi.com/api/episode/", "").toInt()) }
+            setOnClickListener {
+                onClick(
+                    model.replace(
+                        "https://rickandmortyapi.com/api/episode/",
+                        ""
+                    ).toInt()
+                )
+            }
 
         }
     }

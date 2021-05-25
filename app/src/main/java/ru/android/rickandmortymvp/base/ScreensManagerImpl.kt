@@ -3,6 +3,7 @@ package ru.android.rickandmortymvp.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.FragmentTransaction
 import java.lang.ref.WeakReference
 
@@ -65,9 +66,16 @@ class ScreensManagerImpl : ScreensManager {
 
             activity.supportFragmentManager.findFragmentById(mScreenContainerId)
                 ?.let { fragment ->
-                    activity.supportFragmentManager.popBackStack()
-
-                    activity.supportFragmentManager.beginTransaction()
+                    val fmFragment = activity.supportFragmentManager
+                    if (fmFragment.backStackEntryCount > 3) {
+                        fmFragment.popBackStack(
+                            fmFragment.getBackStackEntryAt((fmFragment.backStackEntryCount + 3) - fmFragment.backStackEntryCount).id,
+                            POP_BACK_STACK_INCLUSIVE
+                        )
+                    } else {
+                        fmFragment.popBackStack()
+                    }
+                    fmFragment.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .remove(fragment)
                         .commit()

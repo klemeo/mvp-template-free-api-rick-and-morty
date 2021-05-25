@@ -5,6 +5,7 @@ import org.koin.core.inject
 import ru.android.rickandmortymvp.app.models.data.character.Character
 import ru.android.rickandmortymvp.app.models.repository.Repository
 import ru.android.rickandmortymvp.base.MvpPresenter
+import ru.android.rickandmortymvp.ui.episode.EpisodeScreen
 import ru.android.rickandmortymvp.ui.mappers.CharacterToPresModelMapper
 
 class Presenter(
@@ -20,6 +21,12 @@ class Presenter(
 
     override fun onCreate() {
         loadCharacter(characterId)
+    }
+
+    fun showEpisode(id: Int) {
+        screensManager.showScreen(
+            EpisodeScreen.newInstance(id)
+        )
     }
 
     private fun loadCharacter(id: Int) {

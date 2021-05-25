@@ -34,7 +34,7 @@ class EpisodeScreen : MvpFragment<Presenter>(), View {
 
     private val episodeAdapter by lazy {
         EpisodeAdapter().apply {
-            onClick = { }
+            onClick = { presenter.showCharacter(it) }
         }
     }
 
