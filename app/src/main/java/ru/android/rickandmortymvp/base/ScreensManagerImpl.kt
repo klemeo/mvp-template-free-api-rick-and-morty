@@ -67,14 +67,7 @@ class ScreensManagerImpl : ScreensManager {
             activity.supportFragmentManager.findFragmentById(mScreenContainerId)
                 ?.let { fragment ->
                     val fmFragment = activity.supportFragmentManager
-                    if (fmFragment.backStackEntryCount > 3) {
-                        fmFragment.popBackStack(
-                            fmFragment.getBackStackEntryAt((fmFragment.backStackEntryCount + 3) - fmFragment.backStackEntryCount).id,
-                            POP_BACK_STACK_INCLUSIVE
-                        )
-                    } else {
-                        fmFragment.popBackStack()
-                    }
+                    fmFragment.popBackStack()
                     fmFragment.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .remove(fragment)

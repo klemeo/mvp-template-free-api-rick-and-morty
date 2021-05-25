@@ -27,6 +27,7 @@ class Presenter(
         screensManager.showScreen(
             CharacterScreen.newInstance(id)
         )
+        closeScreen()
     }
 
     private fun loadEpisode(id: Int) {
