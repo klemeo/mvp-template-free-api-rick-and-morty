@@ -12,7 +12,7 @@ abstract class MvpPresenter<V>(view: V) : KoinComponent {
 
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
     protected val composer: Composer by inject()
-    private val screensManager: ScreensManager by inject()
+    protected val screensManager: ScreensManager by inject()
 
     val view: V?
         get() = viewRef.get()

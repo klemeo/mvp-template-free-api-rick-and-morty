@@ -9,7 +9,7 @@ import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.episode_pres_model.EpisodesPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
 
-class EpisodesScreen: MvpFragment<Presenter>(), View {
+class EpisodesScreen : MvpFragment<Presenter>(), View {
 
     override val presenter by lazy {
         Presenter(
@@ -21,7 +21,7 @@ class EpisodesScreen: MvpFragment<Presenter>(), View {
 
     private val episodesAdapter by lazy {
         EpisodesAdapter().apply {
-            onClick = { }
+            onClick = { it.id?.let { episodeId -> presenter.showEpisode(episodeId) } }
         }
     }
 
@@ -35,8 +35,8 @@ class EpisodesScreen: MvpFragment<Presenter>(), View {
 
     }
 
-    override fun refreshEpisodes(characters: EpisodesPresModel) {
-        characters.results?.let { episodesAdapter.setData(it) }
+    override fun refreshEpisodes(episodes: EpisodesPresModel) {
+        episodes.results?.let { episodesAdapter.setData(it) }
     }
 
     override fun showEpisodes(animated: Boolean) {

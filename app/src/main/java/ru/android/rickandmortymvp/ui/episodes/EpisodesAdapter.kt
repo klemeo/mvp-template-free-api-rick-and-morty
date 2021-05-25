@@ -16,6 +16,8 @@ class EpisodesAdapter : RecyclerViewAdapter<EpisodePresModel>() {
 
             textName.text = model.name
 
+            setOnClickListener { onClick(model) }
+
         }
     }
 }
