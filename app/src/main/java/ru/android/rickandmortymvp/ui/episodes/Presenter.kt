@@ -30,8 +30,8 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
                     episodesToPresModelMapper.map(it)
                 }
                 .compose(composer.single())
-                .subscribe({ character ->
-                    view?.refreshEpisodes(character)
+                .subscribe({ episode ->
+                    view?.refreshEpisodes(episode)
                     view?.showEpisodes(true)
                 }, {
                     //.
