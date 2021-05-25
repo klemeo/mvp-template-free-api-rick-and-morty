@@ -21,7 +21,7 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
 
     private val charactersAdapter by lazy {
         CharactersAdapter().apply {
-            onClick = { }
+            onClick = { it.id?.let { characterId -> presenter.showCharacter(characterId) } }
         }
     }
 
