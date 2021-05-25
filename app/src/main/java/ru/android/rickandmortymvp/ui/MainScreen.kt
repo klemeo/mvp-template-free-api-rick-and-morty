@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.fragment_main_screen.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.base.BaseFragment
 import ru.android.rickandmortymvp.ui.characters.CharactersScreen
+import ru.android.rickandmortymvp.ui.episodes.EpisodesScreen
 
 class MainScreen : BaseFragment(R.layout.fragment_main_screen) {
 
@@ -18,7 +19,7 @@ class MainScreen : BaseFragment(R.layout.fragment_main_screen) {
 
         }
         episodesButton.setOnClickListener {
-
+            screensManager.showScreen(EpisodesScreen())
         }
 
     }
