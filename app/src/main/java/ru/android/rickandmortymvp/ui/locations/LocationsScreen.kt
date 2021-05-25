@@ -21,7 +21,7 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
 
     private val locationsAdapter by lazy {
         LocationsAdapter().apply {
-            onClick = { }
+            onClick = { it.id?.let { locationId -> presenter.showLocation(locationId) } }
         }
     }
 

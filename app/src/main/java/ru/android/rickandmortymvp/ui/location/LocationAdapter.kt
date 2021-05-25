@@ -1,10 +1,10 @@
-package ru.android.rickandmortymvp.ui.episode
+package ru.android.rickandmortymvp.ui.location
 
 import kotlinx.android.synthetic.main.item_number.view.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.base.RecyclerViewAdapter
 
-class EpisodeAdapter : RecyclerViewAdapter<String>() {
+class LocationAdapter : RecyclerViewAdapter<String>() {
 
     var onClick: (Int) -> Unit = {}
 
@@ -15,7 +15,7 @@ class EpisodeAdapter : RecyclerViewAdapter<String>() {
 
             numberView.text = model.replace("https://rickandmortyapi.com/api/character/", "")
 
-            setOnClickListener { onClick(model.replace("https://rickandmortyapi.com/api/character/", "").toInt()) }
+//            setOnClickListener { onClick(model.replace("https://rickandmortyapi.com/api/character/", "").toInt()) }
 
         }
     }

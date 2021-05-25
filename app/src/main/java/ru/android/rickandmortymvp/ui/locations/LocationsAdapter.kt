@@ -16,6 +16,8 @@ class LocationsAdapter : RecyclerViewAdapter<LocationPresModel>() {
 
             textName.text = model.name
 
+            setOnClickListener { onClick(model) }
+
         }
     }
 }

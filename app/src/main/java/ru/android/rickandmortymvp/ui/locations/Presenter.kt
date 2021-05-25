@@ -5,6 +5,7 @@ import org.koin.core.inject
 import ru.android.rickandmortymvp.app.models.data.location.Locations
 import ru.android.rickandmortymvp.app.models.repository.Repository
 import ru.android.rickandmortymvp.base.MvpPresenter
+import ru.android.rickandmortymvp.ui.location.LocationScreen
 import ru.android.rickandmortymvp.ui.mappers.LocationsToPresModelMapper
 
 class Presenter(view: View) : MvpPresenter<View>(view) {
@@ -17,6 +18,12 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
 
     override fun onCreate() {
         loadEpisodes()
+    }
+
+    fun showLocation(id: Int) {
+        screensManager.showScreen(
+            LocationScreen.newInstance(id)
+        )
     }
 
     private fun loadEpisodes() {
