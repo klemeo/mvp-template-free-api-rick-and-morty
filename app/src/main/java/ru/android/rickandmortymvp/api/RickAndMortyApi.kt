@@ -3,6 +3,7 @@ package ru.android.rickandmortymvp.api
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import ru.android.rickandmortymvp.app.models.data.character.Character
 import ru.android.rickandmortymvp.app.models.data.character.Characters
 import ru.android.rickandmortymvp.app.models.data.episode.Episode
@@ -13,7 +14,9 @@ import ru.android.rickandmortymvp.app.models.data.location.Locations
 interface RickAndMortyApi {
 
     @GET("character")
-    fun getCharacters(): Single<Characters>
+    fun getCharacters(
+        @Query("page") page: Int?
+    ): Single<Characters>
 
     @GET("character/{id}")
     fun getCharacter(

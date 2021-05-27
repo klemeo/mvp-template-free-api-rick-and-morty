@@ -13,8 +13,8 @@ class RepositoryImpl(
     private val api: RickAndMortyApi
 ) : Repository {
 
-    override fun getCharacters(): Single<Characters> =
-        api.getCharacters().flatMap { response ->
+    override fun getCharacters(page: Int?): Single<Characters> =
+        api.getCharacters(page).flatMap { response ->
             if (response.results != null) {
                 Single.just(response)
             } else {

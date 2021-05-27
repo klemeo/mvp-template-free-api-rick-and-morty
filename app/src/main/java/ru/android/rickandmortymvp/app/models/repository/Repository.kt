@@ -10,7 +10,7 @@ import ru.android.rickandmortymvp.app.models.data.location.Locations
 
 interface Repository {
 
-    fun getCharacters(): Single<Characters>
+    fun getCharacters(page: Int?): Single<Characters>
 
     fun getCharacter(id: Int): Single<Character>
 
