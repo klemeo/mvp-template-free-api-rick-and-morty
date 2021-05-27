@@ -4,13 +4,7 @@ import android.os.Bundle
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_locations.*
-import kotlinx.android.synthetic.main.fragment_locations.backButton
-import kotlinx.android.synthetic.main.fragment_locations.buttonBack
-import kotlinx.android.synthetic.main.fragment_locations.nextButton
-import kotlinx.android.synthetic.main.fragment_locations.pbPost
-import kotlinx.android.synthetic.main.fragment_locations.recyclerView
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationsPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
@@ -41,6 +35,9 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
             adapter = locationsAdapter
         }
 
+        backButton.isGone = true
+        nextButton.isGone = true
+
         buttonBack.setOnClickListener { presenter.closeScreen() }
 
         nextButton.setOnClickListener {
@@ -55,14 +52,21 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshLocations(locations: LocationsPresModel) {
         locations.results?.let { locationsAdapter.setData(it) }
-        nextPage = locations.info?.next?.replace(
+        nextPage = if (locations.info?.next != null) locations.info.next.replace(
             "https://rickandmortyapi.com/api/location?page=",
             ""
-        )?.toInt()
-        prevPage =
-            if (locations.info?.prev != null) locations.info.prev.toString()
-                .replace("https://rickandmortyapi.com/api/location?page=", "")
-                .toInt() else null
+        ).toInt() else null
+        when {
+            nextPage != null -> nextButton.isGone = false
+            nextPage == null -> nextButton.isGone = true
+        }
+        prevPage = if (locations.info?.prev != null) locations.info.prev.toString()
+            .replace("https://rickandmortyapi.com/api/location?page=", "")
+            .toInt() else null
+        when {
+            prevPage != null -> backButton.isGone = false
+            prevPage == null -> backButton.isGone = true
+        }
     }
 
     override fun showLocations(animated: Boolean) {

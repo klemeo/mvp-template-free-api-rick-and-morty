@@ -35,6 +35,9 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
             adapter = charactersAdapter
         }
 
+        backButton.isGone = true
+        nextButton.isGone = true
+
         buttonBack.setOnClickListener { presenter.closeScreen() }
 
         nextButton.setOnClickListener {
@@ -49,14 +52,21 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshCharacters(characters: CharactersPresModel) {
         characters.results?.let { charactersAdapter.setData(it) }
-        nextPage = characters.info?.next?.replace(
+        nextPage = if (characters.info?.next != null) characters.info.next.replace(
             "https://rickandmortyapi.com/api/character?page=",
             ""
-        )?.toInt()
-        prevPage =
-            if (characters.info?.prev != null) characters.info.prev.toString()
-                .replace("https://rickandmortyapi.com/api/character?page=", "")
-                .toInt() else null
+        ).toInt() else null
+        when {
+            nextPage != null -> nextButton.isGone = false
+            nextPage == null -> nextButton.isGone = true
+        }
+        prevPage = if (characters.info?.prev != null) characters.info.prev.toString()
+            .replace("https://rickandmortyapi.com/api/character?page=", "")
+            .toInt() else null
+        when {
+            prevPage != null -> backButton.isGone = false
+            prevPage == null -> backButton.isGone = true
+        }
     }
 
     override fun showCharacters(animated: Boolean) {

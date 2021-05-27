@@ -4,13 +4,7 @@ import android.os.Bundle
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_episodes.*
-import kotlinx.android.synthetic.main.fragment_episodes.backButton
-import kotlinx.android.synthetic.main.fragment_episodes.buttonBack
-import kotlinx.android.synthetic.main.fragment_episodes.nextButton
-import kotlinx.android.synthetic.main.fragment_episodes.pbPost
-import kotlinx.android.synthetic.main.fragment_episodes.recyclerView
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.episode_pres_model.EpisodesPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
@@ -41,6 +35,9 @@ class EpisodesScreen : MvpFragment<Presenter>(), View {
             adapter = episodesAdapter
         }
 
+        backButton.isGone = true
+        nextButton.isGone = true
+
         buttonBack.setOnClickListener { presenter.closeScreen() }
 
         nextButton.setOnClickListener {
@@ -56,14 +53,21 @@ class EpisodesScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshEpisodes(episodes: EpisodesPresModel) {
         episodes.results?.let { episodesAdapter.setData(it) }
-        nextPage = episodes.info?.next?.replace(
+        nextPage = if (episodes.info?.next != null) episodes.info.next.replace(
             "https://rickandmortyapi.com/api/episode?page=",
             ""
-        )?.toInt()
-        prevPage =
-            if (episodes.info?.prev != null) episodes.info.prev.toString()
-                .replace("https://rickandmortyapi.com/api/episode?page=", "")
-                .toInt() else null
+        ).toInt() else null
+        when {
+            nextPage != null -> nextButton.isGone = false
+            nextPage == null -> nextButton.isGone = true
+        }
+        prevPage = if (episodes.info?.prev != null) episodes.info.prev.toString()
+            .replace("https://rickandmortyapi.com/api/episode?page=", "")
+            .toInt() else null
+        when {
+            prevPage != null -> backButton.isGone = false
+            prevPage == null -> backButton.isGone = true
+        }
     }
 
     override fun showEpisodes(animated: Boolean) {
