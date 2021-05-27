@@ -26,7 +26,7 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
         )
     }
 
-    private fun loadCharacters(page: Int? = null) {
+    fun loadCharacters(page: Int? = null) {
         compositeDisposable.add(
             repository.getCharacters(page)
                 .flatMap { character ->

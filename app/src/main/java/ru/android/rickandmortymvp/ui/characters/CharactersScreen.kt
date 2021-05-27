@@ -17,6 +17,10 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
         )
     }
 
+    private var prevPage: Int? = null
+
+    private var nextPage: Int? = null
+
     override val layout: Int = R.layout.fragment_characters
 
     private val charactersAdapter by lazy {
@@ -33,10 +37,26 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
 
         buttonBack.setOnClickListener { presenter.closeScreen() }
 
+        nextButton.setOnClickListener {
+            presenter.loadCharacters(nextPage)
+        }
+
+        backButton.setOnClickListener {
+            presenter.loadCharacters(prevPage)
+        }
+
     }
 
     override fun refreshCharacters(characters: CharactersPresModel) {
         characters.results?.let { charactersAdapter.setData(it) }
+        nextPage = characters.info?.next?.replace(
+            "https://rickandmortyapi.com/api/character?page=",
+            ""
+        )?.toInt()
+        prevPage =
+            if (characters.info?.prev != null) characters.info.prev.toString()
+                .replace("https://rickandmortyapi.com/api/character?page=", "")
+                .toInt() else null
     }
 
     override fun showCharacters(animated: Boolean) {
