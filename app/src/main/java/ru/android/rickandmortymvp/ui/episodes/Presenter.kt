@@ -26,7 +26,7 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
         )
     }
 
-    private fun loadEpisodes(page: Int? = null) {
+    fun loadEpisodes(page: Int? = null) {
         compositeDisposable.add(
             repository.getEpisodes(page)
                 .flatMap { episode ->

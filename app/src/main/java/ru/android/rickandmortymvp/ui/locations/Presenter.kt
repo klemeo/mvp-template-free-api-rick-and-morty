@@ -17,7 +17,7 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
     lateinit var locations: Locations
 
     override fun onCreate() {
-        loadEpisodes()
+        loadLocations()
     }
 
     fun showLocation(id: Int) {
@@ -26,7 +26,7 @@ class Presenter(view: View) : MvpPresenter<View>(view) {
         )
     }
 
-    private fun loadEpisodes(page: Int? = null) {
+    fun loadLocations(page: Int? = null) {
         compositeDisposable.add(
             repository.getLocations(page)
                 .flatMap { location ->
