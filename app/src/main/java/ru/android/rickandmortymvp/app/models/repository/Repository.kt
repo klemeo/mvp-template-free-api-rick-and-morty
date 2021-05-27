@@ -14,11 +14,11 @@ interface Repository {
 
     fun getCharacter(id: Int): Single<Character>
 
-    fun getLocations(): Single<Locations>
+    fun getLocations(page: Int?): Single<Locations>
 
     fun getLocation(id: Int): Single<Location>
 
-    fun getEpisodes(): Single<Episodes>
+    fun getEpisodes(page: Int?): Single<Episodes>
 
     fun getEpisode(id: Int): Single<Episode>
 

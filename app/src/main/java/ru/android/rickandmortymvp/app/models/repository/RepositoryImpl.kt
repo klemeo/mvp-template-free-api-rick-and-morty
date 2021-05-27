@@ -31,8 +31,8 @@ class RepositoryImpl(
             }
         }
 
-    override fun getLocations(): Single<Locations> =
-        api.getLocations().flatMap { response ->
+    override fun getLocations(page: Int?): Single<Locations> =
+        api.getLocations(page).flatMap { response ->
             if (response.results != null) {
                 Single.just(response)
             } else {
@@ -49,8 +49,8 @@ class RepositoryImpl(
             }
         }
 
-    override fun getEpisodes(): Single<Episodes> =
-        api.getEpisodes().flatMap { response ->
+    override fun getEpisodes(page: Int?): Single<Episodes> =
+        api.getEpisodes(page).flatMap { response ->
             if (response.results != null) {
                 Single.just(response)
             } else {

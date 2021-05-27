@@ -24,7 +24,9 @@ interface RickAndMortyApi {
     ): Single<Character>
 
     @GET("location")
-    fun getLocations(): Single<Locations>
+    fun getLocations(
+        @Query("page") page: Int?
+    ): Single<Locations>
 
     @GET("location/{id}")
     fun getLocation(
@@ -32,7 +34,9 @@ interface RickAndMortyApi {
     ): Single<Location>
 
     @GET("episode")
-    fun getEpisodes(): Single<Episodes>
+    fun getEpisodes(
+        @Query("page") page: Int?
+    ): Single<Episodes>
 
     @GET("episode/{id}")
     fun getEpisode(
