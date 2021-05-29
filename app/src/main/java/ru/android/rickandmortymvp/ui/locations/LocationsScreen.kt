@@ -1,14 +1,14 @@
 package ru.android.rickandmortymvp.ui.locations
 
 import android.os.Bundle
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_locations.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationsPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
+import ru.android.rickandmortymvp.ui.utils.gone
 import ru.android.rickandmortymvp.ui.utils.pageLocations
+import ru.android.rickandmortymvp.ui.utils.visible
 
 class LocationsScreen : MvpFragment<Presenter>(), View {
 
@@ -36,8 +36,8 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
             adapter = locationsAdapter
         }
 
-        backButton.isGone = true
-        nextButton.isGone = true
+        backButton.gone()
+        nextButton.gone()
 
         buttonBack.setOnClickListener { presenter.closeScreen() }
 
@@ -56,26 +56,26 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
         nextPage = if (locations.info?.next != null) locations.info.next
             .pageLocations() else null
         when {
-            nextPage != null -> nextButton.isGone = false
-            nextPage == null -> nextButton.isGone = true
+            nextPage != null -> nextButton.visible()
+            nextPage == null -> nextButton.gone()
         }
         prevPage = if (locations.info?.prev != null) locations.info.prev.toString()
             .pageLocations() else null
         when {
-            prevPage != null -> backButton.isGone = false
-            prevPage == null -> backButton.isGone = true
+            prevPage != null -> backButton.visible()
+            prevPage == null -> backButton.gone()
         }
     }
 
     override fun showLocations(animated: Boolean) {
         when (animated) {
             true -> {
-                recyclerView.isVisible = true
-                pbPost.isGone = true
+                recyclerView.visible()
+                pbPost.gone()
             }
             else -> {
-                recyclerView.isGone = true
-                pbPost.isVisible = true
+                recyclerView.gone()
+                pbPost.visible()
             }
         }
     }
