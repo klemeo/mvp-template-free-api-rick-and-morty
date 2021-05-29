@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_episodes.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.episode_pres_model.EpisodesPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
+import ru.android.rickandmortymvp.ui.utils.pageEpisodes
 
 class EpisodesScreen : MvpFragment<Presenter>(), View {
 
@@ -53,17 +54,14 @@ class EpisodesScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshEpisodes(episodes: EpisodesPresModel) {
         episodes.results?.let { episodesAdapter.setData(it) }
-        nextPage = if (episodes.info?.next != null) episodes.info.next.replace(
-            "https://rickandmortyapi.com/api/episode?page=",
-            ""
-        ).toInt() else null
+        nextPage = if (episodes.info?.next != null) episodes.info.next
+            .pageEpisodes() else null
         when {
             nextPage != null -> nextButton.isGone = false
             nextPage == null -> nextButton.isGone = true
         }
         prevPage = if (episodes.info?.prev != null) episodes.info.prev.toString()
-            .replace("https://rickandmortyapi.com/api/episode?page=", "")
-            .toInt() else null
+            .pageEpisodes() else null
         when {
             prevPage != null -> backButton.isGone = false
             prevPage == null -> backButton.isGone = true

@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_characters.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.character_pres_model.CharactersPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
+import ru.android.rickandmortymvp.ui.utils.pageCharacters
 
 class CharactersScreen : MvpFragment<Presenter>(), View {
 
@@ -52,17 +53,14 @@ class CharactersScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshCharacters(characters: CharactersPresModel) {
         characters.results?.let { charactersAdapter.setData(it) }
-        nextPage = if (characters.info?.next != null) characters.info.next.replace(
-            "https://rickandmortyapi.com/api/character?page=",
-            ""
-        ).toInt() else null
+        nextPage = if (characters.info?.next != null) characters.info.next
+            .pageCharacters() else null
         when {
             nextPage != null -> nextButton.isGone = false
             nextPage == null -> nextButton.isGone = true
         }
         prevPage = if (characters.info?.prev != null) characters.info.prev.toString()
-            .replace("https://rickandmortyapi.com/api/character?page=", "")
-            .toInt() else null
+            .pageCharacters() else null
         when {
             prevPage != null -> backButton.isGone = false
             prevPage == null -> backButton.isGone = true

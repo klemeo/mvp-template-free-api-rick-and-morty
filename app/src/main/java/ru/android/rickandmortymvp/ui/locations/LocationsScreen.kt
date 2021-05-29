@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_locations.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationsPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
+import ru.android.rickandmortymvp.ui.utils.pageLocations
 
 class LocationsScreen : MvpFragment<Presenter>(), View {
 
@@ -52,17 +53,14 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
 
     override fun refreshLocations(locations: LocationsPresModel) {
         locations.results?.let { locationsAdapter.setData(it) }
-        nextPage = if (locations.info?.next != null) locations.info.next.replace(
-            "https://rickandmortyapi.com/api/location?page=",
-            ""
-        ).toInt() else null
+        nextPage = if (locations.info?.next != null) locations.info.next
+            .pageLocations() else null
         when {
             nextPage != null -> nextButton.isGone = false
             nextPage == null -> nextButton.isGone = true
         }
         prevPage = if (locations.info?.prev != null) locations.info.prev.toString()
-            .replace("https://rickandmortyapi.com/api/location?page=", "")
-            .toInt() else null
+            .pageLocations() else null
         when {
             prevPage != null -> backButton.isGone = false
             prevPage == null -> backButton.isGone = true
