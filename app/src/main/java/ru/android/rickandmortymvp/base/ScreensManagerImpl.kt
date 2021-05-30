@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.FragmentTransaction
+import ru.android.rickandmortymvp.R
 import java.lang.ref.WeakReference
 
 class ScreensManagerImpl : ScreensManager {
@@ -53,6 +54,7 @@ class ScreensManagerImpl : ScreensManager {
                 .supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .setCustomAnimations(R.anim.to_left_in, R.anim.to_left_out, R.anim.to_right_in, R.anim.to_right_out)
                 .replace(mScreenContainerId, screen, null)
                 .commitAllowingStateLoss()
         }
@@ -70,6 +72,7 @@ class ScreensManagerImpl : ScreensManager {
                     fmFragment.popBackStack()
                     fmFragment.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                        .setCustomAnimations(R.anim.to_left_in, R.anim.to_left_out, R.anim.to_right_in, R.anim.to_right_out)
                         .remove(fragment)
                         .commit()
 
