@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="?attr/colorOnPrimary">
 
     <Button
         android:id="@+id/buttonBack"
@@ -71,7 +71,8 @@
             android:layout_margin="8dp"
             android:fontFamily="@font/bangers"
             android:gravity="center"
-            android:text="Number Character" />
+            android:text="Number Character"
+            android:textColor="?attr/colorOnSecondary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
