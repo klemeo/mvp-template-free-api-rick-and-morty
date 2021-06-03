@@ -1,6 +1,5 @@
 package ru.android.rickandmortymvp.ui.character
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -61,9 +60,9 @@ class CharacterScreen : MvpFragment<Presenter>(), View {
         textLocation.text = character.origin?.name
 
         when (character.status) {
-            "Alive" -> textStatus.setTextColor(Color.parseColor("#4CAF50"))
-            "Dead" -> textStatus.setTextColor(Color.parseColor("#F44336"))
-            else -> textStatus.setTextColor(Color.parseColor("#B89DA8"))
+            "Alive" -> textStatus.getColorGreen()
+            "Dead" -> textStatus.getColorRed()
+            else -> textStatus.getColorGrey()
         }
 
 

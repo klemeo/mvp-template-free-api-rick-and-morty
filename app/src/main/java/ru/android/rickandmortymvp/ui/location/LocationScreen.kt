@@ -1,16 +1,13 @@
 package ru.android.rickandmortymvp.ui.location
 
 import android.os.Bundle
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_location.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
 import ru.android.rickandmortymvp.base.args
-import ru.android.rickandmortymvp.ui.utils.gone
-import ru.android.rickandmortymvp.ui.utils.visible
+import ru.android.rickandmortymvp.ui.utils.*
 
 class LocationScreen : MvpFragment<Presenter>(), View {
 
