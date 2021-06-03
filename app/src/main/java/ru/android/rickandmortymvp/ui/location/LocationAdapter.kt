@@ -3,6 +3,7 @@ package ru.android.rickandmortymvp.ui.location
 import kotlinx.android.synthetic.main.item_number.view.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.base.RecyclerViewAdapter
+import ru.android.rickandmortymvp.ui.utils.pageCharacter
 
 class LocationAdapter : RecyclerViewAdapter<String>() {
 
@@ -13,14 +14,11 @@ class LocationAdapter : RecyclerViewAdapter<String>() {
     override fun bindModel(holder: ViewHolder, model: String) {
         with(holder.itemView) {
 
-            numberView.text = model.replace("https://rickandmortyapi.com/api/character/", "")
+            numberView.text = model.pageCharacter().toString()
 
             setOnClickListener {
                 onClick(
-                    model.replace(
-                        "https://rickandmortyapi.com/api/character/",
-                        ""
-                    ).toInt()
+                    model.pageCharacter()
                 )
             }
 

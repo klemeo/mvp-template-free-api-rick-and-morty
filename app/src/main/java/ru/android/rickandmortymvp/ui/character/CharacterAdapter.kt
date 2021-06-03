@@ -3,6 +3,7 @@ package ru.android.rickandmortymvp.ui.character
 import kotlinx.android.synthetic.main.item_number.view.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.base.RecyclerViewAdapter
+import ru.android.rickandmortymvp.ui.utils.pageEpisode
 
 class CharacterAdapter : RecyclerViewAdapter<String>() {
 
@@ -13,14 +14,11 @@ class CharacterAdapter : RecyclerViewAdapter<String>() {
     override fun bindModel(holder: ViewHolder, model: String) {
         with(holder.itemView) {
 
-            numberView.text = model.replace("https://rickandmortyapi.com/api/episode/", "")
+            numberView.text = model.pageEpisode().toString()
 
             setOnClickListener {
                 onClick(
-                    model.replace(
-                        "https://rickandmortyapi.com/api/episode/",
-                        ""
-                    ).toInt()
+                    model.pageEpisode()
                 )
             }
 
