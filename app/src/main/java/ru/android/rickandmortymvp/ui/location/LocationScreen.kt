@@ -9,6 +9,8 @@ import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
 import ru.android.rickandmortymvp.base.args
+import ru.android.rickandmortymvp.ui.utils.gone
+import ru.android.rickandmortymvp.ui.utils.visible
 
 class LocationScreen : MvpFragment<Presenter>(), View {
 
@@ -58,12 +60,12 @@ class LocationScreen : MvpFragment<Presenter>(), View {
     override fun showLocation(animated: Boolean) {
         when (animated) {
             true -> {
-                linearLayout.isVisible = true
-                pbPost.isGone = true
+                linearLayout.visible()
+                pbPost.gone()
             }
             else -> {
-                linearLayout.isGone = true
-                pbPost.isVisible = true
+                linearLayout.gone()
+                pbPost.visible()
             }
         }
     }

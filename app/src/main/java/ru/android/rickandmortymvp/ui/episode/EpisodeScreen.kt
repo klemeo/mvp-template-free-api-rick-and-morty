@@ -1,14 +1,13 @@
 package ru.android.rickandmortymvp.ui.episode
 
 import android.os.Bundle
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_episode.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.episode_pres_model.EpisodePresModel
 import ru.android.rickandmortymvp.base.MvpFragment
 import ru.android.rickandmortymvp.base.args
+import ru.android.rickandmortymvp.ui.utils.*
 
 class EpisodeScreen : MvpFragment<Presenter>(), View {
 
@@ -63,12 +62,12 @@ class EpisodeScreen : MvpFragment<Presenter>(), View {
     override fun showEpisode(animated: Boolean) {
         when (animated) {
             true -> {
-                linearLayout.isVisible = true
-                pbPost.isGone = true
+                linearLayout.visible()
+                pbPost.gone()
             }
             else -> {
-                linearLayout.isGone = true
-                pbPost.isVisible = true
+                linearLayout.gone()
+                pbPost.visible()
             }
         }
     }

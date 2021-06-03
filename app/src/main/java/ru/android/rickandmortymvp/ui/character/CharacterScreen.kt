@@ -2,8 +2,6 @@ package ru.android.rickandmortymvp.ui.character
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_character.*
@@ -11,6 +9,7 @@ import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.character_pres_model.CharacterPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
 import ru.android.rickandmortymvp.base.args
+import ru.android.rickandmortymvp.ui.utils.*
 
 class CharacterScreen : MvpFragment<Presenter>(), View {
 
@@ -74,12 +73,12 @@ class CharacterScreen : MvpFragment<Presenter>(), View {
     override fun showCharacter(animated: Boolean) {
         when (animated) {
             true -> {
-                linearLayout.isVisible = true
-                pbPost.isGone = true
+                linearLayout.visible()
+                pbPost.gone()
             }
             else -> {
-                linearLayout.isGone = true
-                pbPost.isVisible = true
+                linearLayout.gone()
+                pbPost.visible()
             }
         }
     }
