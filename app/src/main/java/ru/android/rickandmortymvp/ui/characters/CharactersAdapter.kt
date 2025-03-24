@@ -1,7 +1,8 @@
 package ru.android.rickandmortymvp.ui.characters
 
+import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_character.view.*
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.character_pres_model.CharacterPresModel
 import ru.android.rickandmortymvp.base.RecyclerViewAdapter
@@ -16,6 +17,12 @@ class CharactersAdapter : RecyclerViewAdapter<CharacterPresModel>() {
     override fun bindModel(holder: ViewHolder, model: CharacterPresModel) {
         with(holder.itemView) {
 
+            val imagePreview: ImageView = findViewById(R.id.imagePreview)
+            val textName: TextView = findViewById(R.id.textName)
+            val textStatus: TextView = findViewById(R.id.textStatus)
+            val textLocation: TextView = findViewById(R.id.textLocation)
+            val textFirstSeen: TextView = findViewById(R.id.textFirstSeen)
+
             Glide.with(context)
                 .load(model.image)
                 .into(imagePreview)
@@ -23,6 +30,7 @@ class CharactersAdapter : RecyclerViewAdapter<CharacterPresModel>() {
             textName.text = model.name
             textStatus.text = model.status
             textLocation.text = model.origin?.name
+            textFirstSeen.text = model.episode?.first()
 
             when (model.status) {
                 "Alive" -> textStatus.getColorGreen()

@@ -14,6 +14,7 @@
         android:theme="@style/Theme.RickAndMortyMVP">
         <activity
             android:name=".ui.MainActivity"
+            android:exported="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">

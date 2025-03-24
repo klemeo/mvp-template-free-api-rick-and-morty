@@ -1,8 +1,10 @@
 package ru.android.rickandmortymvp.ui.locations
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_locations.*
+import androidx.recyclerview.widget.RecyclerView
 import ru.android.rickandmortymvp.R
 import ru.android.rickandmortymvp.app.models.data.location_pres_model.LocationsPresModel
 import ru.android.rickandmortymvp.base.MvpFragment
@@ -30,22 +32,33 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
         }
     }
 
+    private var buttonBack: Button? = null
+    private var recyclerView: RecyclerView? = null
+    private var pbPost: ProgressBar? = null
+    private var backButton: Button? = null
+    private var nextButton: Button? = null
+
     override fun initView(view: android.view.View, savedInstanceState: Bundle?) {
-        with(recyclerView) {
+        with(view) {
+            buttonBack = findViewById(R.id.buttonBack)
+            recyclerView = findViewById(R.id.recyclerView)
+            pbPost = findViewById(R.id.pbPost)
+            backButton = findViewById(R.id.backButton)
+            nextButton = findViewById(R.id.nextButton)
+        }
+
+        recyclerView?.apply {
             layoutManager = GridLayoutManager(context, 1)
             adapter = locationsAdapter
         }
 
-        backButton.gone()
-        nextButton.gone()
+        buttonBack?.setOnClickListener { presenter.closeScreen() }
 
-        buttonBack.setOnClickListener { presenter.closeScreen() }
-
-        nextButton.setOnClickListener {
+        nextButton?.setOnClickListener {
             presenter.loadLocations(nextPage)
         }
 
-        backButton.setOnClickListener {
+        backButton?.setOnClickListener {
             presenter.loadLocations(prevPage)
         }
 
@@ -56,26 +69,27 @@ class LocationsScreen : MvpFragment<Presenter>(), View {
         nextPage = if (locations.info?.next != null) locations.info.next
             .pageLocations() else null
         when {
-            nextPage != null -> nextButton.visible()
-            nextPage == null -> nextButton.gone()
+            nextPage != null -> nextButton?.visible()
+            nextPage == null -> nextButton?.gone()
         }
         prevPage = if (locations.info?.prev != null) locations.info.prev.toString()
             .pageLocations() else null
         when {
-            prevPage != null -> backButton.visible()
-            prevPage == null -> backButton.gone()
+            prevPage != null -> backButton?.visible()
+            prevPage == null -> backButton?.gone()
         }
     }
 
     override fun showLocations(animated: Boolean) {
         when (animated) {
             true -> {
-                recyclerView.visible()
-                pbPost.gone()
+                recyclerView?.visible()
+                pbPost?.gone()
             }
+
             else -> {
-                recyclerView.gone()
-                pbPost.visible()
+                recyclerView?.gone()
+                pbPost?.visible()
             }
         }
     }

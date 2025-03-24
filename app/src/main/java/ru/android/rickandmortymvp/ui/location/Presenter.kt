@@ -1,12 +1,10 @@
 package ru.android.rickandmortymvp.ui.location
 
-import io.reactivex.Single
-import org.koin.core.inject
-import ru.android.rickandmortymvp.app.models.data.location.Location
+import org.koin.core.component.inject
 import ru.android.rickandmortymvp.app.models.repository.Repository
 import ru.android.rickandmortymvp.base.MvpPresenter
 import ru.android.rickandmortymvp.ui.character.CharacterScreen
-import ru.android.rickandmortymvp.ui.mappers.LocationToPresModelMapper
+import ru.android.rickandmortymvp.ui.mappers.toMap
 
 class Presenter(
     view: View,
@@ -14,10 +12,6 @@ class Presenter(
 ) : MvpPresenter<View>(view) {
 
     private val repository: Repository by inject()
-
-    private val locationToPresModelMapper = LocationToPresModelMapper()
-
-    lateinit var location: Location
 
     override fun onCreate() {
         loadLocation(locationId)
@@ -33,12 +27,8 @@ class Presenter(
     private fun loadLocation(id: Int) {
         compositeDisposable.add(
             repository.getLocation(id)
-                .flatMap {
-                    location = it
-                    Single.just(it)
-                }
                 .map {
-                    locationToPresModelMapper.map(it)
+                    it.toMap()
                 }
                 .compose(composer.single())
                 .subscribe({ location ->
