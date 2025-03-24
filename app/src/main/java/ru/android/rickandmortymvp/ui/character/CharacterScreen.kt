@@ -84,7 +84,8 @@ class CharacterScreen : MvpFragment<Presenter>(), View {
 
         textName?.text = character.name
         textStatus?.text = character.status
-        textLocation?.text = character.origin?.name
+        textLocation?.text = character.location?.name
+        textFirstSeen?.text = character.origin?.name
 
         when (character.status) {
             "Alive" -> textStatus?.getColorGreen()

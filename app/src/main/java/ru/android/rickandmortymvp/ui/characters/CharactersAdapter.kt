@@ -29,8 +29,8 @@ class CharactersAdapter : RecyclerViewAdapter<CharacterPresModel>() {
 
             textName.text = model.name
             textStatus.text = model.status
-            textLocation.text = model.origin?.name
-            textFirstSeen.text = model.episode?.first()
+            textLocation.text = model.location?.name
+            textFirstSeen.text = model.origin?.name
 
             when (model.status) {
                 "Alive" -> textStatus.getColorGreen()
